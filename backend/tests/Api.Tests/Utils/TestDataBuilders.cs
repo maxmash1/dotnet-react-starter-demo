@@ -7,6 +7,50 @@ namespace Api.Tests.Utils;
 public static class TestDataBuilders
 {
     /// <summary>
+    /// Wraps a payload in a single-item response envelope using the provided
+    /// metadata and links, or sensible defaults when omitted.
+    /// </summary>
+    /// <typeparam name="T">The type of the item payload.</typeparam>
+    /// <param name="item">The resource payload to wrap.</param>
+    /// <param name="metadata">Optional metadata; a new default instance is used when null.</param>
+    /// <param name="links">Optional links; a new default instance is used when null.</param>
+    /// <returns>A fully populated <see cref="Api.DTOs.Common.ItemResponseDto{T}"/>.</returns>
+    public static Api.DTOs.Common.ItemResponseDto<T> BuildItemResponse<T>(
+        T item,
+        Api.DTOs.Common.MetadataDto? metadata = null,
+        Api.DTOs.Common.LinksDto? links = null)
+    {
+        return new Api.DTOs.Common.ItemResponseDto<T>
+        {
+            Item = item,
+            Metadata = metadata ?? BuildMetadata(),
+            Links = links ?? BuildLinks()
+        };
+    }
+
+    /// <summary>
+    /// Wraps a collection of items in a collection response envelope using the provided
+    /// metadata and links, or sensible defaults when omitted.
+    /// </summary>
+    /// <typeparam name="T">The type of items in the collection.</typeparam>
+    /// <param name="items">The resource collection to wrap.</param>
+    /// <param name="metadata">Optional metadata; a new default instance is used when null.</param>
+    /// <param name="links">Optional links; a new default instance is used when null.</param>
+    /// <returns>A fully populated <see cref="Api.DTOs.Common.CollectionResponseDto{T}"/>.</returns>
+    public static Api.DTOs.Common.CollectionResponseDto<T> BuildCollectionResponse<T>(
+        IEnumerable<T> items,
+        Api.DTOs.Common.MetadataDto? metadata = null,
+        Api.DTOs.Common.LinksDto? links = null)
+    {
+        return new Api.DTOs.Common.CollectionResponseDto<T>
+        {
+            Items = items,
+            Metadata = metadata ?? BuildMetadata(),
+            Links = links ?? BuildLinks()
+        };
+    }
+
+    /// <summary>
     /// Creates a sample health response for testing purposes.
     /// </summary>
     /// <param name="status">Health status value (default: "healthy").</param>
