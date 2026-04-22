@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { SystemHealthPage } from './routes/health/HealthPage';
 
+const GITHUB_REPO_URL = import.meta.env.VITE_GITHUB_REPO_URL || 'https://github.com/maxmash1/dotnet-react-starter-demo';
+
 /**
  * Main application shell with routing and navigation.
  */
@@ -94,7 +96,7 @@ function WelcomeLanding() {
             Check System Health
           </Link>
           <a
-            href="https://github.com/maxmash1/dotnet-react-starter-demo"
+            href={GITHUB_REPO_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-md border border-gray-700 px-6 py-3 text-sm font-medium text-gray-300 hover:text-white hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-gray-950 transition-colors"
