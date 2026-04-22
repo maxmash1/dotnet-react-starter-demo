@@ -97,3 +97,7 @@ See `.github/copilot-instructions.md` for complete development standards includi
 ## License
 
 MIT
+
+## Sample prompt
+
+I was working on another app and I loved the styling so much I want to apply it to this one, modify the front-end completely based on the file is in the directory called design-system.instructions.md. The stack may be different so make sure you appropriate styling here based on this application's stack. Create this in a demo-1 branch, if it works well I'll create a separate one to show it off in another demo
