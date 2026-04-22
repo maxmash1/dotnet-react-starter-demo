@@ -4,12 +4,12 @@
  */
 export function LoadingSpinner() {
   return (
-    <div className="flex flex-col items-center justify-center py-12" role="status" aria-label="Loading content">
+    <div className="flex flex-col items-center justify-center py-24" role="status" aria-label="Loading content">
       <div
-        className="w-12 h-12 border-4 border-[var(--color-brand-primary)] border-t-transparent rounded-full animate-spin"
+        className="w-12 h-12 border-4 border-violet-600 border-t-transparent rounded-full animate-spin"
         aria-hidden="true"
       />
-      <span className="mt-4 text-[var(--color-brand-text)] font-medium">
+      <span className="mt-4 text-gray-400 text-sm font-medium">
         Loading data...
       </span>
     </div>

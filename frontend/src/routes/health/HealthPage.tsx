@@ -62,51 +62,99 @@ export function SystemHealthPage() {
   }
 
   const { item: healthInfo, metadata } = healthData;
-  const statusColorClass = healthInfo.status === 'healthy' 
-    ? 'bg-green-100 text-green-800 border-green-300'
-    : 'bg-yellow-100 text-yellow-800 border-yellow-300';
+  const isHealthy = healthInfo.status === 'healthy';
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-[var(--color-brand-text)]">
-        System Health Status
-      </h2>
+    <div className="relative space-y-6">
+      {/* Decorative background glow orbs */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden -z-10">
+        <div className="absolute -top-20 -right-20 h-60 w-60 rounded-full bg-violet-600/20 blur-3xl" />
+        <div className="absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-fuchsia-600/20 blur-3xl" />
+      </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6 space-y-4">
+      {/* Page heading */}
+      <div>
+        <p className="text-sm font-semibold tracking-wider text-violet-400 uppercase mb-1">
+          Monitoring
+        </p>
+        <h2 className="text-3xl font-bold tracking-tight text-white">
+          System Health Status
+        </h2>
+      </div>
+
+      {/* Main status card */}
+      <div className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-5 backdrop-blur-sm">
+        {/* Status row */}
         <div className="flex items-center gap-4">
-          <span className="text-gray-600 font-medium w-32">Status:</span>
-          <span className={`px-3 py-1 rounded-full border font-semibold ${statusColorClass}`}>
-            {healthInfo.status.toUpperCase()}
+          <span className="text-gray-400 font-medium w-36 text-sm">Status</span>
+          <div className="flex items-center gap-2">
+            {/* Animated ping dot */}
+            <span className="relative flex h-3 w-3">
+              {isHealthy && (
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+              )}
+              <span
+                className={`relative inline-flex rounded-full h-3 w-3 ${
+                  isHealthy ? 'bg-green-400' : 'bg-yellow-400'
+                }`}
+              />
+            </span>
+            <span
+              className={`text-sm font-semibold ${
+                isHealthy ? 'text-green-400' : 'text-yellow-400'
+              }`}
+            >
+              {healthInfo.status.toUpperCase()}
+            </span>
+          </div>
+        </div>
+
+        <div className="border-t border-white/5" />
+
+        {/* Version row */}
+        <div className="flex items-center gap-4">
+          <span className="text-gray-400 font-medium w-36 text-sm">Version</span>
+          <span className="text-white text-sm font-mono">{healthInfo.version}</span>
+        </div>
+
+        <div className="border-t border-white/5" />
+
+        {/* Environment row */}
+        <div className="flex items-center gap-4">
+          <span className="text-gray-400 font-medium w-36 text-sm">Environment</span>
+          <span className="inline-flex items-center rounded-md bg-violet-600/10 px-2.5 py-0.5 text-xs font-medium text-violet-400 ring-1 ring-inset ring-violet-500/20">
+            {healthInfo.environment}
           </span>
         </div>
 
-        <div className="flex items-center gap-4">
-          <span className="text-gray-600 font-medium w-32">Version:</span>
-          <span className="text-[var(--color-brand-text)]">{healthInfo.version}</span>
-        </div>
+        <div className="border-t border-white/5" />
 
+        {/* Checked at row */}
         <div className="flex items-center gap-4">
-          <span className="text-gray-600 font-medium w-32">Environment:</span>
-          <span className="text-[var(--color-brand-text)]">{healthInfo.environment}</span>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <span className="text-gray-600 font-medium w-32">Checked At:</span>
-          <span className="text-[var(--color-brand-text)]">
+          <span className="text-gray-400 font-medium w-36 text-sm">Checked At</span>
+          <span className="text-white text-sm">
             {new Date(healthInfo.checkedAtDate).toLocaleString()}
           </span>
         </div>
       </div>
 
-      <div className="bg-gray-50 rounded-lg p-4">
-        <h3 className="text-sm font-semibold text-gray-600 mb-2">Response Metadata</h3>
-        <p className="text-sm text-gray-500">
-          <span className="font-medium">Transaction ID:</span> {metadata.transactionId}
-        </p>
-        <p className="text-sm text-gray-500">
-          <span className="font-medium">Timestamp:</span> {metadata.timestamp}
-        </p>
+      {/* Metadata panel */}
+      <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+        <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+          Response Metadata
+        </h3>
+        <div className="space-y-1.5">
+          <p className="text-xs text-gray-400">
+            <span className="font-medium text-gray-300">Transaction ID:</span>{' '}
+            <span className="font-mono">{metadata.transactionId}</span>
+          </p>
+          <p className="text-xs text-gray-400">
+            <span className="font-medium text-gray-300">Timestamp:</span>{' '}
+            {metadata.timestamp}
+          </p>
+        </div>
       </div>
     </div>
   );
 }
+
