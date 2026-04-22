@@ -2,11 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Light theme (default) */
 :root {
   --color-brand-header: #87adeb;
   --color-brand-content: #e0f1fa;
   --color-brand-primary: #0066cc;
   --color-brand-text: #333333;
+
+  /* Dashboard design tokens — light */
+  --ds-bg-page: #f1f5f9;
+  --ds-bg-card: #ffffff;
+  --ds-bg-card-hover: #f8fafc;
+  --ds-bg-sidebar: #ffffff;
+  --ds-border: #e2e8f0;
+  --ds-text-heading: #0f172a;
+  --ds-text-body: #475569;
+  --ds-text-muted: #94a3b8;
+  --ds-accent-primary: #0066cc;
+  --ds-accent-primary-hover: #0052a3;
+  --ds-accent-success: #16a34a;
+  --ds-accent-success-bg: #dcfce7;
+  --ds-accent-warning: #d97706;
+  --ds-accent-warning-bg: #fef3c7;
+  --ds-accent-danger: #dc2626;
+  --ds-accent-danger-bg: #fee2e2;
+  --ds-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --ds-shadow-lg: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+/* Dark theme — activated by `.dark` class on <html> */
+.dark {
+  --color-brand-header: #1e3a5f;
+  --color-brand-content: #0f172a;
+  --color-brand-primary: #60a5fa;
+  --color-brand-text: #e2e8f0;
+
+  /* Dashboard design tokens — dark */
+  --ds-bg-page: #0f172a;
+  --ds-bg-card: #1e293b;
+  --ds-bg-card-hover: #263348;
+  --ds-bg-sidebar: #1e293b;
+  --ds-border: #334155;
+  --ds-text-heading: #f1f5f9;
+  --ds-text-body: #cbd5e1;
+  --ds-text-muted: #64748b;
+  --ds-accent-primary: #60a5fa;
+  --ds-accent-primary-hover: #93c5fd;
+  --ds-accent-success: #4ade80;
+  --ds-accent-success-bg: #14532d;
+  --ds-accent-warning: #fbbf24;
+  --ds-accent-warning-bg: #451a03;
+  --ds-accent-danger: #f87171;
+  --ds-accent-danger-bg: #450a0a;
+  --ds-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+  --ds-shadow-lg: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
 }
 
 body {
@@ -14,6 +63,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, sans-serif;
   -webkit-font-smoothing: antialiased;
-  background-color: var(--color-brand-content);
-  color: var(--color-brand-text);
+  background-color: var(--ds-bg-page);
+  color: var(--ds-text-body);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
