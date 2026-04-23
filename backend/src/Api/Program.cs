@@ -1,8 +1,14 @@
 using System.Reflection;
+using Api.Data;
 using Api.Extensions;
 using Api.Middleware;
+using Microsoft.EntityFrameworkCore;
 
 var applicationBuilder = WebApplication.CreateBuilder(args);
+
+// Register the EF Core database context (InMemory by default for the starter)
+applicationBuilder.Services.AddDbContext<AppDbContext>(dbContextOptions =>
+    dbContextOptions.UseInMemoryDatabase("AppDb"));
 
 // Register application services
 applicationBuilder.Services.AddApplicationServices();

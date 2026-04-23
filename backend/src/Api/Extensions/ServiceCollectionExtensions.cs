@@ -1,3 +1,6 @@
+using Api.Repositories;
+using Api.Services;
+
 namespace Api.Extensions;
 
 /// <summary>
@@ -15,10 +18,10 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         // Register repositories here using AddScoped
-        // Example: services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+        services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
         // Register services here using AddScoped
-        // Example: services.AddScoped<IEmployeeService, EmployeeService>();
+        services.AddScoped<IEmployeeService, EmployeeService>();
 
         return services;
     }
