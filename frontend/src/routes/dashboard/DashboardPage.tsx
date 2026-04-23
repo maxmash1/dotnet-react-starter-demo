@@ -115,6 +115,7 @@ export function DashboardPage() {
       if (stored !== null) return stored === 'dark';
       return window.matchMedia('(prefers-color-scheme: dark)').matches;
     } catch {
+      // localStorage or matchMedia may be unavailable in restricted environments (e.g. SSR, sandboxed iframes)
       return false;
     }
   });
@@ -125,7 +126,8 @@ export function DashboardPage() {
     try {
       localStorage.setItem('dashboard-theme', next ? 'dark' : 'light');
     } catch {
-      // ignore storage errors
+      // localStorage may be blocked (private browsing, storage quota exceeded).
+      // The toggle still works for the current session; preference just won't persist.
     }
   };
 
@@ -143,7 +145,7 @@ export function DashboardPage() {
         }
       } catch (err) {
         if (isMounted) {
-          const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
+          const errorMessage = err instanceof Error ? err.message : 'An unexpected error occurred while loading dashboard data';
           setErrorText(errorMessage);
           setPageState('error');
         }
