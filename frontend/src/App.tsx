@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { SystemHealthPage } from './routes/health/HealthPage';
+import { DashboardPage } from './routes/dashboard/DashboardPage';
 
 /**
  * Main application shell with routing and navigation.
@@ -24,6 +25,14 @@ export function ApplicationShell() {
               </li>
               <li>
                 <Link
+                  to="/dashboard"
+                  className="text-white hover:text-blue-100 transition-colors"
+                >
+                  Dashboard
+                </Link>
+              </li>
+              <li>
+                <Link
                   to="/health"
                   className="text-white hover:text-blue-100 transition-colors"
                 >
@@ -37,6 +46,7 @@ export function ApplicationShell() {
         <main className="flex-1 max-w-6xl mx-auto w-full px-6 py-8">
           <Routes>
             <Route path="/" element={<WelcomeLanding />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/health" element={<SystemHealthPage />} />
           </Routes>
         </main>
