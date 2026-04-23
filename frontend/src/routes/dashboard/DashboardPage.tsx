@@ -111,7 +111,9 @@ export function DashboardPage() {
   const [errorText, setErrorText] = useState<string>('');
   const [isDark, setIsDark] = useState<boolean>(() => {
     try {
-      return localStorage.getItem('dashboard-theme') === 'dark';
+      const stored = localStorage.getItem('dashboard-theme');
+      if (stored !== null) return stored === 'dark';
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
     } catch {
       return false;
     }
@@ -241,7 +243,7 @@ export function DashboardPage() {
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-violet-100 dark:bg-violet-600/10">
                 <CheckCircleIcon />
               </div>
-              <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">Health Status</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Health Status</p>
               <p
                 className={`text-lg font-semibold ${
                   isHealthy
@@ -258,7 +260,7 @@ export function DashboardPage() {
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-violet-100 dark:bg-violet-600/10">
                 <TagIcon />
               </div>
-              <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">Version</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Version</p>
               <p className="text-lg font-semibold text-gray-900 dark:text-white">
                 {healthInfo.version}
               </p>
@@ -269,7 +271,7 @@ export function DashboardPage() {
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-violet-100 dark:bg-violet-600/10">
                 <ServerIcon />
               </div>
-              <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">Environment</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Environment</p>
               <p className="text-lg font-semibold text-gray-900 dark:text-white">
                 {healthInfo.environment}
               </p>
@@ -283,7 +285,7 @@ export function DashboardPage() {
             </h3>
             <div className="space-y-3">
               <div className="flex items-start gap-3">
-                <span className="text-xs font-medium text-gray-400 dark:text-gray-500 w-28 pt-0.5 shrink-0">
+                <span className="text-xs font-medium text-gray-600 dark:text-gray-400 w-28 pt-0.5 shrink-0">
                   Transaction ID
                 </span>
                 <span className="text-sm text-gray-700 dark:text-gray-300 font-mono break-all">
@@ -291,7 +293,7 @@ export function DashboardPage() {
                 </span>
               </div>
               <div className="flex items-start gap-3">
-                <span className="text-xs font-medium text-gray-400 dark:text-gray-500 w-28 pt-0.5 shrink-0">
+                <span className="text-xs font-medium text-gray-600 dark:text-gray-400 w-28 pt-0.5 shrink-0">
                   Checked At
                 </span>
                 <span className="text-sm text-gray-700 dark:text-gray-300">
@@ -299,7 +301,7 @@ export function DashboardPage() {
                 </span>
               </div>
               <div className="flex items-start gap-3">
-                <span className="text-xs font-medium text-gray-400 dark:text-gray-500 w-28 pt-0.5 shrink-0">
+                <span className="text-xs font-medium text-gray-600 dark:text-gray-400 w-28 pt-0.5 shrink-0">
                   Timestamp
                 </span>
                 <span className="text-sm text-gray-700 dark:text-gray-300">
