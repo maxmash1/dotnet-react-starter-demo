@@ -64,4 +64,34 @@ public static class TestDataBuilders
             Prev = prevUrl
         };
     }
+
+    /// <summary>
+    /// Creates a sample Employee domain entity for testing purposes.
+    /// </summary>
+    /// <param name="id">Employee primary key (default: 1).</param>
+    /// <param name="fullName">Full display name (default: "Test Employee").</param>
+    /// <param name="email">Email address (default: "test.employee@example.com").</param>
+    /// <param name="department">Department name (default: "Engineering").</param>
+    /// <param name="jobTitle">Job title (default: "Software Engineer").</param>
+    /// <param name="active">Active status indicator (default: true).</param>
+    /// <returns>A configured Employee domain entity.</returns>
+    public static Api.Domain.Employee BuildEmployee(
+        int id = 1,
+        string fullName = "Test Employee",
+        string email = "test.employee@example.com",
+        string department = "Engineering",
+        string jobTitle = "Software Engineer",
+        bool active = true)
+    {
+        return new Api.Domain.Employee
+        {
+            Id = id,
+            FullName = fullName,
+            Email = email,
+            Department = department,
+            JobTitle = jobTitle,
+            HireDate = new DateTime(2022, 1, 1),
+            ActiveIndicator = active
+        };
+    }
 }
