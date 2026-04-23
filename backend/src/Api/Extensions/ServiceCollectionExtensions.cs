@@ -1,3 +1,8 @@
+using Api.Data;
+using Api.Repositories;
+using Api.Services;
+using Microsoft.EntityFrameworkCore;
+
 namespace Api.Extensions;
 
 /// <summary>
@@ -14,11 +19,15 @@ public static class ServiceCollectionExtensions
     /// <returns>The service collection for method chaining.</returns>
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        // Register repositories here using AddScoped
-        // Example: services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+        // Register EF Core DbContext with InMemory provider for development
+        services.AddDbContext<AppDbContext>(dbOptions =>
+            dbOptions.UseInMemoryDatabase("OrganizationDb"));
 
-        // Register services here using AddScoped
-        // Example: services.AddScoped<IEmployeeService, EmployeeService>();
+        // Register repositories
+        services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
+        // Register services
+        services.AddScoped<IEmployeeService, EmployeeService>();
 
         return services;
     }

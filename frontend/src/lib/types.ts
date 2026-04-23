@@ -48,3 +48,14 @@ export interface ApiErrorResponse {
     message: string;
   }>;
 }
+
+/** Employee directory entry */
+export interface EmployeeInfo {
+  employeeId: number;
+  fullName: string;
+  email: string;
+  department: string;
+  jobTitle: string;
+  hireDate?: string;
+  activeIndicator: boolean;
+}

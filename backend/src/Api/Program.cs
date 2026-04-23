@@ -1,4 +1,5 @@
 using System.Reflection;
+using Api.Data;
 using Api.Extensions;
 using Api.Middleware;
 
@@ -51,6 +52,13 @@ applicationBuilder.Services.AddCors(corsOptions =>
 });
 
 var webApplication = applicationBuilder.Build();
+
+// Ensure InMemory database is created and seeded
+using (var scope = webApplication.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    dbContext.Database.EnsureCreated();
+}
 
 // Enable Swagger in development
 if (webApplication.Environment.IsDevelopment())
